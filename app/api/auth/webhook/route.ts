@@ -1,4 +1,4 @@
-import { api } from "@/convex/_generated/api";
+import { api } from "../../../../convex/_generated/api.js";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { fetchMutation } from "convex/nextjs";
 import { headers } from "next/headers";
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
           profileImage: payload?.data?.profile_image_url,
         };
 
-        // await fetchMutation(api.users.createUser, userData);
+        await fetchMutation(api.users.createUser, userData);
 
         return NextResponse.json({
           status: 200,
