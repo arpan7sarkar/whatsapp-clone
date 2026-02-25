@@ -43,3 +43,20 @@ export const readUser = query({
         }
     }
 })
+
+export const updateUser = mutation({
+    args:{
+        userId:v.string(),
+        name:v.string()
+    },
+    handler:async (ctx, args) => {
+        const userInfo = await ctx.db.query("users").filter((user) => user.eq(user.field("userId"), args.userId)).first();
+        if(!userInfo){
+            throw new Error("User not found");
+        }
+        const updateUser = await ctx.db.patch(userInfo._id!,{
+        name:args.name
+        });
+        return updateUser
+    }
+})
